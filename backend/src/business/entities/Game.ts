@@ -1,14 +1,16 @@
 import Move from "./Move";
 import Players from "./Players";
+import {injectable} from "inversify";
 
 /**
  * The Game
  */
+@injectable()
 export default class Game {
 
     static readonly PROCESS = 'process';
     static readonly WAITING = 'waiting';
-    private _status: string;
+    private _status: string = Game.WAITING;
 
     /**
      * First move
@@ -24,7 +26,7 @@ export default class Game {
      * Move counter
      * @type {number}
      */
-    private moveNum: number;
+    private moveNum: number = 0;
     /**
      * Count players needed to start the game
      */
@@ -39,11 +41,8 @@ export default class Game {
      * Start the game (starts the first joined player with id 1)
      */
     start(): boolean {
-        this.moveNum = 1;
-
         let firstNumber = require('random-int');
-        this._initMove = this.addMove(this.players.getPlayer(1), firstNumber(17, 100));
-
+        this._initMove = this.addMove(this.players.getPlayer(0), firstNumber(17, 100));
         this._status = Game.PROCESS;
 
         return true;
@@ -92,10 +91,21 @@ export default class Game {
         return false;
     }
 
-    enoughPlayers(): boolean {
+    /**
+     * Is it enough players to start?
+     * @returns {boolean}
+     */
+    private enoughPlayers(): boolean {
         return this.players.total() === this.needPlayers;
     }
 
+    /**
+     * Who is next?
+     * @returns {number}
+     */
+    private nextPlayerId(): number {
+        return this.moveNum % this.needPlayers;
+    }
 
     /**
      * Add move
@@ -104,13 +114,14 @@ export default class Game {
      * @returns {Move}
      */
     addMove(player: string, number: number): Move {
-        let playerId = this.moveNum % this.needPlayers; // Players change by circle (it passes around)
+        let playerId = this.nextPlayerId(); // Players change by circle (it passes around)
 
         if (this.players.find(player) !== playerId) {
             throw new Error('It\'s not ' + player + '\'s move');
         }
 
         this._lastMove = new Move(playerId, number, this.lastMove);
+        this.moveNum++;
 
         return this._lastMove;
     }
@@ -120,21 +131,10 @@ export default class Game {
      * @returns {string}
      */
     next(): { player: string; number: number } {
-        this.moveNum++;
-        let id = this.moveNum % this.needPlayers;
-
         return {
-            player: this.players.getPlayer(id),
+            player: this.players.getPlayer(this.nextPlayerId()),
             number: this._lastMove.result
         };
-    }
-
-    /**
-     * Get first move of the game
-     * @returns {Move}
-     */
-    get firstMove(): Move {
-        return this._initMove;
     }
 
     /**
@@ -150,6 +150,6 @@ export default class Game {
      * @returns {number}
      */
     checkWinner(): number {
-        return this.lastMove.result === 1 ? this.lastMove.gamerId : null;
+        return this.lastMove.result === 1 ? this.lastMove.playerId : null;
     }
 }

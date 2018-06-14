@@ -45,7 +45,7 @@ export default class Players {
      * @returns {string}
      */
     getPlayer(id: number): string {
-        return this._online[id - 1];
+        return this._online[id];
     }
 
     /**
@@ -55,6 +55,6 @@ export default class Players {
      */
     find(name: string): number {
         let id = this._online.indexOf(name);
-        return id > -1 ? id + 1 : null;
+        return id > -1 ? id : null;
     }
 }

@@ -21,7 +21,7 @@ export default class Move {
     /**
      * Gamer, who did move
      */
-    private _gamerId: number;
+    private _playerId: number;
 
     /**
      * Constructor
@@ -31,11 +31,9 @@ export default class Move {
      */
     constructor(playerId: number, mutationNumber: number, previous: Move = null) {
 
-        this._mutationNumber = mutationNumber;
-        this._gamerId = playerId;
         this._previous = previous;
-
-        this.calculate();
+        this._mutationNumber = mutationNumber;
+        this._playerId = playerId;
 
         this.check();
     }
@@ -50,33 +48,31 @@ export default class Move {
     /**
      * @returns {number}
      */
-    get gamerId(): number {
-        return this._gamerId;
+    get playerId(): number {
+        return this._playerId;
+    }
+
+    private isFirstMove(): boolean {
+        return this._previous === null;
     }
 
     /**
      * Check, that move is correct
      */
-    check() {
-        if (this._previous.gamerId === this.gamerId) {
-            throw new Error('Double move of user ' + this.gamerId);
-        }
-
-        if (this._result % 3 !== 0) {
-            throw new Error('Result must be divided by 3 without residue');
-        }
-    }
-
-    /**
-     * Calculate result of move
-     */
-    private calculate() {
-        if (!this._previous) {
-            // This is first move
-            this._result = this._mutationNumber;
+    private check(): void {
+        if (this.isFirstMove()) {
+            this._result = this._mutationNumber; // Is initial number
             this._mutationNumber = 0;
 
             return;
+        }
+
+        if (this._previous.playerId === this.playerId) {
+            throw new Error('Double move of user ' + this.playerId);
+        }
+
+        if ((this._previous.result + this._mutationNumber) % 3 !== 0) {
+            throw new Error('Result must be divided by 3 without residue');
         }
 
         this._result = (this._previous.result + this._mutationNumber) / 3;

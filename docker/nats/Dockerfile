@@ -1,1 +1,1 @@
-FROM nats:1.0.6
+FROM nats:latest

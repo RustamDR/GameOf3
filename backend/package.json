@@ -1,8 +1,10 @@
 {
   "name": "gameOf3",
   "version": "1.0.0",
+  "author": "Rustam D.",
+  "license": "ISC",
   "main": "service.js",
-  "description": "Test!",
+  "description": "",
   "scripts": {
     "start": "npm run serve",
     "build": "npm run build-ts",
@@ -14,9 +16,8 @@
     "watch-ts": "tsc -w",
     "tslint": "tslint -c tslint.json -p tsconfig.json"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "reflect-metadata": "^0.1.10",
     "@types/node": "^8.5.2",
     "inversify": "^4.10.0",
     "nats": "^0.7.24",

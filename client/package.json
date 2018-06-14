@@ -1,0 +1,16 @@
+{
+  "name": "Game_Of_3_Client",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Rustam D.",
+  "license": "ISC",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1",
+    "nats": "^0.7.24",
+    "websocket-nats": "^0.3.3"
+  }
+}

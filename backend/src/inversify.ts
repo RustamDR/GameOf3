@@ -9,5 +9,4 @@ ioc.bind<Game>(TYPES.Game).to(Game).inSingletonScope().onActivation(function (co
     game.needPlayers = appConf.countOfPlayers;
     return game;
 });
-
 export {ioc};

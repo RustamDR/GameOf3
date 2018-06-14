@@ -13,7 +13,6 @@ export interface IAppEventsConfig {
     }
 }
 
-
 //------------------------------ Game interfaces
 /**
  * Nats message income interface
@@ -23,9 +22,23 @@ export interface IIncomeMsg<T> {
     readonly data: T;
 }
 
+/**
+ * Start game income data
+ */
 export interface IStartGame {
 }
 
+export interface IStartGameReply {
+    action: string;
+    data: any;
+}
+
+/**
+ * Movement income data
+ */
 export interface IMove {
-    mutateNumber: number;
+    mutationNumber: number;
+}
+
+export interface IMoveReply extends IStartGameReply {
 }

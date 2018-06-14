@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import appConf from "./config/service.config";
 import {subscribe} from "./helpers/natsFacade";
 import log from "./helpers/error";

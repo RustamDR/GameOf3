@@ -13,7 +13,7 @@ services:
     volumes:
       - ${NATS_HOST_LOG_PATH}:/var/log
     networks:
-      - backend
+      - gameof3
 
 #---------------------------------------------
 #            Game backend config
@@ -26,10 +26,28 @@ services:
     volumes:
       - ./backend:${BACKEND_PATH}
     networks:
-      - game
+      - gameof3
     depends_on:
       - nats
 
+#---------------------------------------------
+#            Game client config
+#---------------------------------------------
+  client:
+    build:
+      context: ./docker/client
+      args:
+        - WORKDIR=${CLIENT_PATH}
+    ports:
+      - "${CLIENT_PORT}:3000"
+    volumes:
+      - ./client:${CLIENT_PATH}
+    networks:
+      - gameof3
+    depends_on:
+      - nats
+      - game
+
 networks:
-  game:
+  gameof3:
     driver: "bridge"

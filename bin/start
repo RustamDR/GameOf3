@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Rebuild and start containers (all by default)
+
+DIR="$(pwd)"
+
+#docker-compose.yml must exist
+if [ ! -e $DIR'/docker-compose.yml' ]; then
+    echo "No docker-compose.yml file, copy docker-compose.example.yml to docker-compose.yml and configure it"
+    exit;
+fi
+
+# .env must exist
+if [ ! -e $DIR'/.env' ]; then
+    echo "No .env file, copy .example.env to .env and configure it"
+    exit;
+fi
+
+docker-compose up --build -d "$@"

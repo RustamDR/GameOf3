@@ -1,0 +1,26 @@
+.idea
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# Mac DS_Store Files
+.DS_Store
+
+/node_modules
+/**/node_modules/
+/data
+/logs
+
+/**/package-lock.json
+.env
+docker-compose.yml
+
+!*.example.*

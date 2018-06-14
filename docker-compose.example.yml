@@ -1,0 +1,35 @@
+version: '2'
+services:
+
+#---------------------------------------------
+#                 Nats config
+#---------------------------------------------
+  nats:
+    build:
+      context: ./docker/nats
+    expose:
+      - 4222
+    restart: on-failure
+    volumes:
+      - ${NATS_HOST_LOG_PATH}:/var/log
+    networks:
+      - backend
+
+#---------------------------------------------
+#            Game backend config
+#---------------------------------------------
+  game:
+    build:
+      context: ./docker/backend
+      args:
+        - WORKDIR=${BACKEND_PATH}
+    volumes:
+      - ./backend:${BACKEND_PATH}
+    networks:
+      - game
+    depends_on:
+      - nats
+
+networks:
+  game:
+    driver: "bridge"

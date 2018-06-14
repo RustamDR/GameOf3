@@ -42,6 +42,7 @@ sudo systemctl enable docker
 ~~~
 
 ### Starting the project
+
 Start project
 ~~~
 ./bin/start
@@ -65,6 +66,7 @@ config/service.config.ts => countOfPlayers (by default 2 players)
 ~~~
 
 #### Join to the game
+
 When needed count of players achieves, it starts. When the last player joins the game, the first player generates initial
 number and passes the movement to the second player. In case of two players it will be the second.
 ~~~
@@ -76,6 +78,7 @@ http://localhost:3000/Peter/join => {"action":"move","data":{"player":"Peter","n
 ~~~
 
 #### Make move
+
 You can chose the move strongly from -1, 0, 1 (:number must be > 0 in the uri)
 ~~~
 http://localhost:3000/:PlayerName/move/:number (send >=0)
@@ -87,24 +90,31 @@ http://localhost:3000/Alex/move/minus/1     => {"action":"move","data":{"player"
 ~~~
 
 #### Winner
+
 When somebody wins, you will get this object
 ~~~
 {"action":"won","data":{"player":"John"}}
 ~~~
 
 #### Stop game
+
 Any player, who participates in the game can stop the game
 ~~~
 http://localhost:3000/:PlayerName/stop => {"sucess" => true}
 ~~~
 
 ### Monitoring logs
+
 You can monitor behavior on the backend side and on client side
+
 Client
 ~~~
-docker attach gameof3_client_1
+example 1 (container up): docker attach gameof3_client_1 
+example 2 (container down): docker start --attach gameof3_client_1
 ~~~
+
 Backend
 ~~~
-docker attach gameof3_game_1
+example 1 (container up): docker attach gameof3_game_1 
+example 2 (container down): docker start --attach gameof3_game_1
 ~~~

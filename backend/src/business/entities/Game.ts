@@ -38,7 +38,7 @@ export default class Game {
     players: Players = new Players;
 
     /**
-     * Start the game (starts the first joined player with id 1)
+     * Start the game (starts the first joined player with id 0)
      */
     start(): boolean {
         let firstNumber = require('random-int');

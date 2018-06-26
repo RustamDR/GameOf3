@@ -37,7 +37,7 @@ export default class MoveService {
             divideBy = gameConf.divideBy;
 
         if (tempResult % divideBy !== 0) {
-            throw new Error('Result must be divided by 3 without residue');
+            throw new Error('Result must be divided by '+ divideBy + ' without residue');
         }
 
         return new Move(player, mutationNumber, tempResult / divideBy, game.lastMove);

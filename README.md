@@ -69,7 +69,7 @@ Stop project
 
 You can setup game rules in config/game.config.ts
 
-Devider of result to pass to the next player 
+Divider of result to pass to the next player 
 ~~~
 divideBy (by default 3)
 ~~~

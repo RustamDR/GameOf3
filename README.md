@@ -60,9 +60,23 @@ Stop project
 
 ### Game
 
-You can setup players count by changing countOfPlayers in
+You can setup game rules in config/game.config.ts
+
+Devider of result to pass to the next player 
 ~~~
-config/service.config.ts => countOfPlayers (by default 2 players)
+divideBy (by default 3)
+~~~
+Players count:
+~~~
+countOfPlayers (by default 2 players)
+~~~
+Minimum by randomizing initial number
+~~~
+min (by default 10)
+~~~
+And maximum by randomizing initial number
+~~~
+max (by default 100)
 ~~~
 
 #### Join to the game

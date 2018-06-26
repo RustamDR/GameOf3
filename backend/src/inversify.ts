@@ -1,12 +1,16 @@
 import {Container} from "inversify";
-import Game from "./business/entities/Game";
-import {TYPES} from "./config/types";
-import appConf from "./config/service.config";
+import {TYPES} from "./types";
+import Game from "./models/Game";
+import GameService from "./services/GameService";
+import MoveService from "./services/MoveService";
+import gameConf from "./config/game.config";
 
 const ioc = new Container();
 
-ioc.bind<Game>(TYPES.Game).to(Game).inSingletonScope().onActivation(function (context, game) {
-    game.needPlayers = appConf.countOfPlayers;
-    return game;
-});
+// -------------------------Singletons
+ioc.bind<Game>(TYPES.Game).toConstantValue(new Game(gameConf.countOfPlayers));
+
+// -------------------------Services
+ioc.bind<GameService>(TYPES.GameService).to(GameService).inSingletonScope();
+ioc.bind<MoveService>(TYPES.MoveService).to(MoveService).inSingletonScope();
 export {ioc};

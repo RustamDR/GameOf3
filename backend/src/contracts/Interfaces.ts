@@ -1,8 +1,17 @@
 /**
+ * Game rules
+ */
+export interface IGameRules {
+    divideBy: number; // The number that has to divide result without residue
+    min: number;      // Min bound of random initial number
+    max: number;      // Max bound of random initial number
+    countOfPlayers: number; // Players needed to start the game
+}
+
+/**
  * Config structure of events
  */
 export interface IAppEventsConfig {
-    countOfPlayers: number;
     eventsListen: {
         [eventName: string]: {
             resolve: Function,
@@ -13,7 +22,12 @@ export interface IAppEventsConfig {
     }
 }
 
-//------------------------------ Game interfaces
+//------------------------------ Game handlers interfaces
+/**
+ * Custom type Id
+ */
+export type IdType = number | string;
+
 /**
  * Nats message income interface
  */

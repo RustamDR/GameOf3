@@ -1,18 +1,16 @@
 import {IAppEventsConfig} from "../contracts/Interfaces";
-import StartGame from "../business/operations/StartGame";
-import Move from "../business/operations/Move";
-import StopGame from "../business/operations/StopGame";
+import StartGame from "../handlers/StartGame";
+import DoMove from "../handlers/DoMove";
+import StopGame from "../handlers/StopGame";
 
 const appConf: IAppEventsConfig = {
-
-    countOfPlayers: 2,
 
     eventsListen: {
         join: {
             resolve: StartGame,
         },
         move: {
-            resolve: Move,
+            resolve: DoMove,
         },
         stop: {
             resolve: StopGame,

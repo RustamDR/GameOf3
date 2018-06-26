@@ -1,6 +1,13 @@
 Game of 3 
 -
 
+### Description
+
+The game is designated for 2 or more players. The main approach is to reach 1 by dividing the received number from the  
+previous player. But before dividing the receiving player can always choose between adding one of​ {­1, 0, 1} to 
+get to a number that is divisible by​ 3 (by default). If it's not 1, he hands on the number to the next player. The same 
+rules are applied until one the player reaches the number​ 1 after the division.
+
 ### Installation
 
 Warning!

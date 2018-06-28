@@ -124,6 +124,12 @@ Any player, who participates in the game can stop the game
 http://localhost:3000/:PlayerName/stop => {"sucess" => true}
 ~~~
 
+### Testing
+Running unit and behavioral tests
+~~~
+docker exec -it gameof3_game_1 /bin/bash -c 'npm test'
+~~~
+
 ### Monitoring logs
 
 You can monitor behavior on the backend side and on client side
